@@ -1,1 +1,3 @@
->## CMS
+>## Flashcard
+- redux
+- webpack
