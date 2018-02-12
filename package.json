@@ -12,14 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Phara0h@gitlab.com/esports-score/cms.git"
+    "url": "https://gitlab.com/tamerelsayed.com/flashcard"
   },
   "keywords": [
-    "dota",
-    "nodejs",
+    "Flashcard",
+    "Redux",
     "react",
-    "graphql",
-    "apollo"
+    "Japanes"
   ],
   "author": "Tamer Elsayed",
   "license": "ISC",
