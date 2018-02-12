@@ -1,0 +1,64 @@
+{
+  "name": "flashcards_jp",
+  "version": "0.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress",
+    "start": "webpack-dev-server -d --hot --config webpack.config.js --watch --progress",
+    "server": "nodemon ./server.js --exec babel-node -e js",
+    "production": "NODE_ENV=production webpack --progress",
+    "production:win": "SET NODE_ENV=production && webpack --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Phara0h@gitlab.com/esports-score/cms.git"
+  },
+  "keywords": [
+    "dota",
+    "nodejs",
+    "react",
+    "graphql",
+    "apollo"
+  ],
+  "author": "Tamer Elsayed",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.2.6",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.2.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "classnames": "^2.2.5",
+    "css-hot-loader": "^1.3.7",
+    "css-loader": "^0.28.9",
+    "es6-promise-promise": "^1.0.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "image-webpack-loader": "^4.1.0",
+    "node-sass": "^4.7.2",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "postcss-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.1.8",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "xhr": "^2.4.1"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-hot-loader": "^3.1.3",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2"
+  }
+}

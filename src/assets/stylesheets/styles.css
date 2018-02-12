@@ -1,0 +1,137 @@
+body{
+    padding-bottom: 50px;
+}
+
+.selectRow, .apt-addheading{
+    cursor: pointer;
+}
+
+.ShowResults, .react-bs-table-container
+{
+    margin-bottom: 10px;
+}
+
+.dataList-group
+{
+    overflow: inherit;
+}
+
+.react-datalist {
+    margin: 0 !important;
+    border: 1px solid #a1c1e7;
+    max-height: 500px;
+    background-color: #fff;
+    z-index: 10;
+    width: 90%;
+    position: absolute;
+}
+
+.react-datalist .react-datalist-option {
+    display: block;
+    margin: 0 !important;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.react-datalist .react-datalist-option:hover {
+    background-color: #bad4fe;
+}
+
+.react-datalist .react-datalist-option.react-datalist-option-selected {
+    background-color: #bad4fe;
+}
+
+.loginPanel
+{
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 50px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    transition: background-color .218s,border-color .218s,box-shadow .218s;
+    border: solid 1px #e2e2e2;
+}
+
+.googleLoginBtn
+{
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    color: #757575;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    height: 36px;
+    width: 120px;
+    border: none;
+    margin: 0 auto;
+    display: block;
+}
+
+.googleLoginLogo
+{
+    float: left;
+    padding: 8px;
+}
+
+.googleLoginTxt
+{
+    font-family: Roboto,arial,sans-serif;
+    font-weight: 500;
+    letter-spacing: .21px;
+    margin-left: 6px;
+    margin-right: 6px;
+    vertical-align: top;
+    font-size: 13px;
+    line-height: 34px;
+}
+
+.errorLoginP
+{
+    padding: 0 0 20px;
+    font-weight: bold;
+    color: #710000;
+    text-align: center;
+}
+
+.label {
+    display: inline-block;
+    line-height: 1.5;
+    font-weight: normal;
+}
+
+.btnYN
+{
+    margin-right: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    font-size: 0.8em;
+}
+
+.btnYN:hover
+{
+    color: #D2D2D2;
+}
+
+.success {
+    background-color: rgb(92, 184, 92);
+}
+
+.danger {
+    background-color: rgb(217, 83, 79);
+}

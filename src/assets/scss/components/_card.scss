@@ -1,0 +1,60 @@
+.card {
+    // Functunality
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    height: 52rem;
+    text-align: center;
+
+    &__side {
+        height: 52rem;
+        transition: all .8s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: $default-border-radius;
+        box-shadow: 0 1.5rem 4rem rgba( $color-black, 0.15 );
+        overflow: hidden;
+        transition: all .5s;
+
+        &--front {
+            background-color: $color-white;
+        }
+    
+        &--back {
+            transform: rotateY(180deg);
+            background-color: red;
+        }
+    }
+
+    &__front-symbol {
+        font-size: 10rem;
+    }
+
+    &__DOWN {
+        & .card__side--front {
+            transform: rotateY(-180deg);
+        }
+
+        & .card__side--back {
+            transform: rotateY(0deg);
+        }
+    }
+
+    &__btn-box {
+        padding: 0 5rem;
+    }
+
+    &__btn {
+        width: 100%;
+        padding: 1rem 0;
+        margin-bottom: .5rem;
+        border: navy;
+        background: midnightblue;
+        color: white;
+        cursor: pointer;
+    }
+}
