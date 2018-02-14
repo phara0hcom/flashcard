@@ -4,9 +4,24 @@ import { connect } from "react-redux";
 class Answers extends Component {
   render() {
     return <div className="card__btn-box">
-        <input type="button" className="card__btn" value={this.props.symbolObj.roman} />
-        <input type="button" className="card__btn" value="RA" />
-        <input type="button" className="card__btn" value="SU" />
+        <input 
+          type="button"
+          className="card__btn"
+          onClick={this.props.click}
+          value={this.props.symbolObj.roman}
+        />
+        <input 
+          type="button"
+          className="card__btn"
+          onClick={this.props.click}
+          value="SU"
+        />
+        <input 
+          type="button"
+          className="card__btn"
+          onClick={this.props.click}
+          value="RA"
+        />
       </div>;
   }
 }
