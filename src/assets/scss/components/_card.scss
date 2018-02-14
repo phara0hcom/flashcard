@@ -19,6 +19,7 @@
         box-shadow: 0 1.5rem 4rem rgba( $color-black, 0.15 );
         overflow: hidden;
         transition: all .5s;
+        opacity: 1;
 
         &--front {
             background-color: $color-white;
@@ -31,7 +32,9 @@
     }
 
     &__front-symbol {
-        font-size: 10rem;
+        font-size: 20rem;
+        line-height: 1;
+        margin-bottom: $margin-medium;
     }
 
     &__DOWN {
@@ -54,7 +57,21 @@
         margin-bottom: .5rem;
         border: navy;
         background: midnightblue;
-        color: white;
+        color: $color-white;
         cursor: pointer;
+    }
+
+    &__score {
+        background-color: $color-gray-dark-3;
+        color: $color-white;
+        @include clearfix;
+        padding: 1rem 2rem;
+        text-align: left;
+        margin-bottom: $margin-medium;
+
+        &-current {
+            float: left;
+            width: 50%;
+        }
     }
 }

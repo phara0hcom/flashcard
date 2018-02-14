@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 class Answers extends Component {
   render() {
-    return <div className="card__btn-box">
+    return (
+      <div className="card__btn-box">
         <input 
           type="button"
           className="card__btn"
@@ -22,7 +23,8 @@ class Answers extends Component {
           onClick={this.props.click}
           value="RA"
         />
-      </div>;
+      </div>
+    );
   }
 }
 
