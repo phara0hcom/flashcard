@@ -1,7 +1,9 @@
 import { FLIP } from "../constants/card.constant";
+import { basicHiragana } from "../decks/hiragana";
 
 const initialState = {
-  face: "UP"
+  face: "UP",
+  symbolNr: 0
 };
 
 const FLIPcard = ( current ) => {
@@ -17,8 +19,12 @@ const card = (state = initialState, action) => {
   switch (action.type) {
     case FLIP:
       return { ...state, face: FLIPcard ( state.face ) };
+
     default:
-      return state;
+      return { 
+        ...state,
+        symbolObj: basicHiragana[state.symbolNr]
+      }
   }
 };
 

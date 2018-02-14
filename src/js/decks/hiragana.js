@@ -1,4 +1,4 @@
-const basicHiragana = [
+export const basicHiragana = [
   //∅
   {
     index: "Hira_∅_a",
@@ -246,7 +246,7 @@ const basicHiragana = [
   }
 ];
 
-const dakutenHiragana = [
+export const dakutenHiragana = [
   //G
   {
     index: "Hira_G_a",
