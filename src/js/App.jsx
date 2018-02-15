@@ -10,9 +10,12 @@ import Home from './page/Home';
 import About from './page/About';
 import NotFound from './page/NotFound';
 
-export default class App extends Component {
 
+
+export default class App extends Component {
+    
     render() {
+
         return (
             <Provider store={store}>
                 <Router>
