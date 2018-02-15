@@ -7,7 +7,6 @@ import {
 
 import { getAllScores } from "../functions/card.localstorage";
 
-console.log(getAllScores);
 
 export const flip = () => {
   return {
@@ -31,6 +30,7 @@ export const update_scores = (pastScore, cardScore) => {
 }
 
 export const initiate_scores = (state) => {
+  console.log("initiate_scores ACTION");
   return { 
     type: INITIATE_SCORES,
     payload: getAllScores(state)

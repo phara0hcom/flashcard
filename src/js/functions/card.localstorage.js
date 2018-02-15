@@ -1,4 +1,5 @@
 import localforage from "localforage";
+import { returnDeck } from "./card.decks";
 
 localforage.config({
   driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
@@ -42,76 +43,95 @@ const saveKey = (key, value) => {
 }
 
 // gets the past score out of the localDB storage
-export const getPastScore = (store) => {
-    getKeyValue("pastScore")
-    .then(pastScore => {
-        console.log("Saved Paste", pastScore);
-        // if null then store empty score card is saved
-        if (!pastScore) {
-            saveKey("pastScore", {
-                questions_played: 0,
-                questions_failed: 0,
-                questions_correct: 0
-            })
-            .then(value => {
-                return value;
-            })
-            .catch(err => {
-                console.log("Error", err);
-            });
-        } else {
-            // return pastScrore that was saved in a previous session
-            return pastScore;
-        }
-    })
-    .catch(err => {
-        console.log("getPastScore Error", err);
-    });
-};
-
-export const getCardScore = ( state ) => {
-    //const index = deck[symbolNr].index;
-
-    getKeyValue(index)
-    .then(cardScore => {
-        if (!cardScore) {
-            deck.map(element => {
-                console.log(element.index);
-
-                saveKey(element.index, {
+export const getPastScore = () => {
+    return new Promise( (resolve, reject) => {
+        console.log("getPastScore Function ");
+        getKeyValue("pastScore")
+        .then(pastScore => {
+            console.log("Saved Paste", pastScore);
+            // if null then store empty score card is saved
+            if (!pastScore) {
+                saveKey("pastScore", {
                     questions_played: 0,
                     questions_failed: 0,
                     questions_correct: 0
                 })
                 .then(value => {
-                    console.log("saved", value);
+                    resolve(  value );
                 })
                 .catch(err => {
-                    console.log("ERROR save", err);
+                    console.log("Error", err);
+                    reject( err );
+                });
+            } else {
+                // return pastScrore that was saved in a previous session
+                resolve(  pastScore );
+            }
+        })
+        .catch(err => {
+            console.log("getPastScore Error", err);
+            reject( err );
+        });
+    });
+};
+
+export const getCardScore = ( state ) => {
+    return new Promise((resolve, reject) => {
+        console.log("getCardScore state ", state);
+        console.log("getCardScore Function ");
+      const index = state.symbolObj.index;
+      const deck = returnDeck(state);
+      console.log("getCardScore deck ", deck);
+      console.log("getCardScore index ", index);
+      getKeyValue(index)
+        .then(cardScore => {
+          if (!cardScore) {
+            deck.map(element => {
+              console.log(element.index);
+
+              saveKey(element.index, {
+                questions_played: 0,
+                questions_failed: 0,
+                questions_correct: 0
+              })
+                .then(value => {
+                  console.log("saved", value);
+                })
+                .catch(err => {
+                  console.log("ERROR save", err);
                 });
             });
 
-            return { questions_played: 0, questions_failed: 0, questions_correct: 0 };
-
-
-        } else {
-            return cardScore;
-        }
-    })
-    .catch(err => {
-        console.log("getCardScore Error", err);
+            resolve({
+              questions_played: 0,
+              questions_failed: 0,
+              questions_correct: 0
+            });
+          } else {
+            resolve(cardScore);
+          }
+        })
+        .catch(err => {
+          console.log("getCardScore Error", err);
+          reject(err);
+        });
     });
 };
 
 
 export const getAllScores = ( state ) => {
-    return new Promise((resolve, reject) => {
+
+    return new Promise( (resolve, reject) => {
         Promise.all([
-            getCardScore( state ),
-            getPastScore( state )
+            getPastScore( state ),
+            getCardScore( state )
         ])
         .then( values => {
-            console.log("getAllScores values", values);
+            resolve({ 
+                pastScore: values[0],
+                cardScore: values[1]
+            });
+
         })
         .catch( err => {
             console.log("getAllScores ERROR", err);

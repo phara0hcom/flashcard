@@ -17,7 +17,7 @@ class Card extends Component {
   componentDidMount () {
     const { store } = this.context;
 
-    store.dispatch(initiate_scores(store, update_scores));
+    store.dispatch(initiate_scores( this.props.card ));
   }
 
   render() {

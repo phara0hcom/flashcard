@@ -1,10 +1,11 @@
 import decks from "../decks";
 
 
-export const returnDeck = () => {
-
+export const returnDeck = ( state ) => {
+    console.log( decks );
+    return decks[state.deck];
 }
+
 export const getCurrentSymbol = ( state ) => {
-    console.log( decks[state.deck][state.symbolNr]);
     return decks[state.deck][state.symbolNr];
 }

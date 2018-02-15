@@ -7,6 +7,7 @@ import {
   UPDATE_SCORES
 } from "../constants/card.constant";
 
+import { FLIPcard, checkAnswer } from "../functions/card.reducer";
 import { getPastScore, getCardScore } from "../functions/card.localstorage";
 import { getCurrentSymbol } from "../functions/card.decks";
 import { basicHiragana } from "../decks/hiragana";
@@ -34,42 +35,6 @@ const initialState = {
     questions_correct: 0
   }
 };
-
-const FLIPcard = (current, state ) => {
-  switch (current) {
-    case "UP":
-      return { ...state, face: "DOWN" };
-    default:
-      return { ...state, face: "UP" };
-  }
-};
-
-const checkAnswer = (state, answer) => {
-  const correct_ans = basicHiragana[state.symbolNr].roman;
-  const NewScore = state.score;
-
-  if ( correct_ans !== answer )
-  {
-    return {
-      ...state,
-      score: { 
-        ...NewScore,
-        questions_failed: NewScore.questions_failed + 1
-      }
-    }
-  }
-  else
-  {
-    return {
-      ...state,
-      face: "DOWN",
-      score: {
-        ...NewScore,
-        questions_failed: NewScore.questions_correct + 1
-      }
-    }
-  }
-}
 
 const card = (state = initialState, action) => {
   switch (action.type) {
