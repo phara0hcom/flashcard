@@ -20,17 +20,14 @@ const initialState = {
   symbolNr: 0,
   last_answer: null,
   score: {
-    questions_played: 0,
     questions_failed: 0,
     questions_correct: 0
   },
   pastScore: {
-    questions_played: 0,
     questions_failed: 0,
     questions_correct: 0
   },
   cardScore: {
-    questions_played: 0,
     questions_failed: 0,
     questions_correct: 0
   }
@@ -46,9 +43,9 @@ const card = (state = initialState, action) => {
 
       return checkAnswer(state, action.value);
 
+    //might not need this
     case UPDATE_SCORES:
       console.log("UPDATED SCORES", action);
-
       return {
         ...state,
         pastScore: action.pastScore,
@@ -57,7 +54,6 @@ const card = (state = initialState, action) => {
 
     case INITIATE_SCORES_PENDING:
       console.log("INITIATE_SCORES_PENDING");
-      //getCardScore( basicHiragana, state.symbolNr );
       return { 
         ...state,
         fetchingScore: true
@@ -65,7 +61,6 @@ const card = (state = initialState, action) => {
 
     case INITIATE_SCORES_FULFILLED:
       console.log("INITIATE_SCORES_FULFILLED");
-      //getCardScore( basicHiragana, state.symbolNr );
       return { 
         ...state,
         fetchingScore: false,
@@ -75,7 +70,6 @@ const card = (state = initialState, action) => {
 
     case INITIATE_SCORES_REJECTED:
       console.log("INITIATE_SCORES_REJECTED");
-      //getCardScore( basicHiragana, state.symbolNr );
       return { 
         ...state,
         fetchingScore: false,
@@ -91,6 +85,5 @@ const card = (state = initialState, action) => {
       };
   }
 };
-
 
 export default card;

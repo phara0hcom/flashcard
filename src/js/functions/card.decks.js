@@ -2,7 +2,6 @@ import decks from "../decks";
 
 
 export const returnDeck = ( state ) => {
-    console.log( decks );
     return decks[state.deck];
 }
 

@@ -38,11 +38,18 @@
     }
 
     &__DOWN {
+
         & .card__side--front {
+            animation-name: cardCorrect;
+            animation-duration: 1.75s;
+            transition-delay: 2s;
             transform: rotateY(-180deg);
         }
 
+
+
         & .card__side--back {
+            transition-delay: 2s;
             transform: rotateY(0deg);
         }
     }

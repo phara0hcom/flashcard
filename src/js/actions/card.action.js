@@ -29,8 +29,8 @@ export const update_scores = (pastScore, cardScore) => {
   };
 }
 
-export const initiate_scores = (state) => {
-  console.log("initiate_scores ACTION");
+export const initiate_score = (state) => {
+  console.log("INITIATE_SCORES ACTION");
   return { 
     type: INITIATE_SCORES,
     payload: getAllScores(state)

@@ -25,7 +25,7 @@ const getKeyValue = key => {
 }
 
 // save a key
-const saveKey = (key, value) => {
+export const saveKey = (key, value) => {
   return new Promise((resolve, reject) => {
     localforage
       .setItem(key, value)
@@ -52,7 +52,6 @@ export const getPastScore = () => {
             // if null then store empty score card is saved
             if (!pastScore) {
                 saveKey("pastScore", {
-                    questions_played: 0,
                     questions_failed: 0,
                     questions_correct: 0
                 })
@@ -75,67 +74,81 @@ export const getPastScore = () => {
     });
 };
 
+//get the CardScore from the localforage from the state
 export const getCardScore = ( state ) => {
     return new Promise((resolve, reject) => {
-        console.log("getCardScore state ", state);
-        console.log("getCardScore Function ");
       const index = state.symbolObj.index;
-      const deck = returnDeck(state);
-      console.log("getCardScore deck ", deck);
-      console.log("getCardScore index ", index);
       getKeyValue(index)
         .then(cardScore => {
           if (!cardScore) {
-            deck.map(element => {
-              console.log(element.index);
 
-              saveKey(element.index, {
-                questions_played: 0,
-                questions_failed: 0,
-                questions_correct: 0
-              })
-                .then(value => {
-                  console.log("saved", value);
-                })
-                .catch(err => {
-                  console.log("ERROR save", err);
-                });
-            });
-
-            resolve({
-              questions_played: 0,
+            saveKey(index, {
               questions_failed: 0,
               questions_correct: 0
+            })
+            .then(value => {
+              console.log("saved", value);
+              resolve( value );
+            })
+            .catch(err => {
+              console.log("ERROR save", err);
+              reject( err );
             });
+
           } else {
             resolve(cardScore);
           }
         })
         .catch(err => {
           console.log("getCardScore Error", err);
-          reject(err);
+          reject( err );
         });
     });
 };
 
 
 export const getAllScores = ( state ) => {
+    return Promise.all([
+        getPastScore( state ),
+        getCardScore( state )
+    ])
+    .then( values => {
+      console.log("getAllScores", values);
+      return { 
+          pastScore: values[0],
+          cardScore: values[1]
+      };
 
-    return new Promise( (resolve, reject) => {
-        Promise.all([
-            getPastScore( state ),
-            getCardScore( state )
-        ])
-        .then( values => {
-            resolve({ 
-                pastScore: values[0],
-                cardScore: values[1]
-            });
+    })
+    .catch( err => {
+        console.log("getAllScores ERROR", err);
+        return err;
+    })
+}
 
-        })
-        .catch( err => {
-            console.log("getAllScores ERROR", err);
-            reject( err );
-        })
+export const updateCardScore = (state, corrAnswerd) => {
+    const index = state.symbolObj.index;
+    let CardScore = state.cardScore;
+    console.log("updateCardScore >> CardScore", CardScore);
+    console.log("updateCardScore >> corrAnswerd", corrAnswerd);
+
+    if ( corrAnswerd ) {
+      CardScore = {
+        ...CardScore,
+        questions_correct: CardScore.questions_correct + 1
+      };
+    } else {
+      CardScore = {
+        ...CardScore,
+        questions_failed: CardScore.questions_failed + 1
+      };
+    }
+
+    saveKey(index, CardScore)
+    .then( value => {
+      console.log("updateCardScore >> saveKey", value);
+    })
+    .catch( err =>{
+      console.log("updateCardScore >> saveKey", err);
     })
 }
