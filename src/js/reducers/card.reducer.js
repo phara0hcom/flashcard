@@ -4,7 +4,8 @@ import {
   INITIATE_SCORES_PENDING,
   INITIATE_SCORES_FULFILLED,
   INITIATE_SCORES_REJECTED,
-  UPDATE_SCORES
+  UPDATE_SCORES,
+  RESET_LAST_ANSWER
 } from "../constants/card.constant";
 
 import { FLIPcard, checkAnswer } from "../functions/card.reducer";
@@ -19,6 +20,7 @@ const initialState = {
   fetchScoreError: false,
   symbolNr: 0,
   last_answer: null,
+  answered: [],
   score: {
     questions_failed: 0,
     questions_correct: 0
@@ -41,7 +43,7 @@ const card = (state = initialState, action) => {
 
     case ANSWER_QUESTION:
 
-      return checkAnswer(state, action.value);
+      return checkAnswer(state, action);
 
     //might not need this
     case UPDATE_SCORES:
@@ -76,6 +78,11 @@ const card = (state = initialState, action) => {
         fetchScoreError: true
       };
 
+    case RESET_LAST_ANSWER:
+      return { 
+        ...state,
+        last_answer: null
+      };
 
     default:
 

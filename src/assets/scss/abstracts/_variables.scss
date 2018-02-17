@@ -10,7 +10,12 @@ $color-secondary-light: #ffb900;
 $color-secondary-dark: #ff7730;
 
 $color-tertiary-light: #2998ff;
-$color-tertiary-dark: #5643fa;
+$color-tertiary-dark: #1e77ec;
+$color-tertiary-darker: #0351b8;
+
+$color-quinary-light: #ff9081;
+$color-quinary-dark: #ff5e49;
+$color-quinary-darker: #aa1502;
 
 $color-gray-light-1: #f7f7f7;
 $color-gray-light-2: #eee;
@@ -33,6 +38,10 @@ $gutter-horizontal: 6rem;
 
 //Styling
 $default-border-radius: 3px;
+
+//Styling Card
+
+$default-border-radius-card: 2rem;
 
 //Margin variables
 $margin-huge: 10rem;

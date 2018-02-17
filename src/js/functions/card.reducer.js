@@ -24,10 +24,13 @@ const calScore = ( score, corrAnswerd ) => {
     }
 }
 
-export const checkAnswer = (state, answer) => {
+export const checkAnswer = (state, action) => {
     const correct_ans = state.symbolObj.roman;
-    const corrAnswerd = correct_ans === answer;
+    const corrAnswerd = correct_ans === action.value;
     const face = corrAnswerd ? "DOWN" : "UP";
+    console.log(action );
+    const answered = [ ...state.answered,
+                        action.btnNr ];
 
     //updateCardScore(state, corrAnswerd);
     saveKey(state.symbolObj.index, calScore(state.cardScore, corrAnswerd))
@@ -49,6 +52,8 @@ export const checkAnswer = (state, answer) => {
     return {
         ...state,
         face,
+        answered,
+        last_answer: corrAnswerd,
         score: calScore( state.score,  corrAnswerd ),
         cardScore : calScore( state.cardScore,  corrAnswerd ),
         pastScore : calScore( state.pastScore,  corrAnswerd )

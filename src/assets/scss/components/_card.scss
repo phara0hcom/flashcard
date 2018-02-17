@@ -2,9 +2,9 @@
     // Functunality
     perspective: 150rem;
     -moz-perspective: 150rem;
-    position: relative;
-    height: 52rem;
+    position: relative; 
     text-align: center;
+    height: 52rem;
 
     &__side {
         height: 52rem;
@@ -15,7 +15,7 @@
         width: 100%;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-        border-radius: $default-border-radius;
+        border-radius: $default-border-radius-card;
         box-shadow: 0 1.5rem 4rem rgba( $color-black, 0.15 );
         overflow: hidden;
         transition: all .5s;
@@ -26,29 +26,30 @@
         }
     
         &--back {
+            padding: 5rem;
             transform: rotateY(180deg);
-            background-color: red;
+            background-image: linear-gradient( to right bottom, $color-primary-light,  $color-primary-dark );
         }
     }
-
-    &__front-symbol {
-        font-size: 20rem;
-        line-height: 1;
+    &__front--symbol {
         margin-bottom: $margin-medium;
     }
 
+    &__front--symbol, &__back--flex {
+        font-size: 20rem;
+        line-height: 1;
+        text-transform: uppercase;
+    }
 
     &__DOWN {
 
         & .card__side--front {
             animation-name: cardCorrect;
-            animation-duration: 1.75s;
+            animation-duration: 1.8s;
             transition-delay: 2s;
             transform: rotateY(-180deg);
             position: relative;
         }
-
-        
 
         & .card__side--back {
             transition-delay: 2s;
@@ -60,15 +61,6 @@
         padding: 0 5rem;
     }
 
-    &__btn {
-        width: 100%;
-        padding: 1rem 0;
-        margin-bottom: .5rem;
-        border: navy;
-        background: midnightblue;
-        color: $color-white;
-        cursor: pointer;
-    }
 
     &__score {
         background-color: $color-gray-dark-3;
@@ -81,6 +73,34 @@
         &-current {
             float: left;
             width: 50%;
+        }
+    }
+
+    &__back {
+
+        &--inner {
+            border-radius: $default-border-radius-card;
+            border: 2rem solid $color-white;
+            height: 100%;
+            background-image: url( images/escheresque-dark.png);
+            color: $color-white;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        &--flex {
+            align-self: center;
+            text-shadow: 1px 1px 7px rgba( $color-black, 0.9 );
+        }
+    }
+
+    &__wrong {
+
+        & .card__side--front {
+            animation-name: cardFail;
+            animation-duration: 1s;
         }
     }
 }

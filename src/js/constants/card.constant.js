@@ -1,4 +1,5 @@
 export const FLIP = "FLIP";
+export const RESET_LAST_ANSWER = "RESET_LAST_ANSWER";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 export const UPDATE_SCORES = "UPDATE_SCORES";
 export const INITIATE_SCORES = "INITIATE_SCORES";
