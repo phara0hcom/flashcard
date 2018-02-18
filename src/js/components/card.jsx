@@ -6,7 +6,8 @@ import {
   click_answer,
   initiate_score,
   update_scores,
-  reset_last_answer
+  reset_last_answer,
+  next_question
 } from "../actions/card.action";
 import Answers from "./Answers";
 
@@ -25,16 +26,16 @@ class Card extends Component {
   wronAnsw(last_answer) {
     const { store } = this.context;
 
-    console.log(last_answer );
+    console.log( last_answer );
     if ( last_answer === false ) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
-      }, 1100);
+      }, 1200);
       return 'wrong';
     } else if ( last_answer === true ) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
-      }, 1100);
+      }, 2200);
       return "correct";
     } else {
       return "nothing";
@@ -43,7 +44,7 @@ class Card extends Component {
 
   render() {
     const cardProp = this.props.card;
-    return <div className={`card card__${cardProp.face} card__`+this.wronAnsw(cardProp.last_answer)}>
+    return <div className={`card card__${cardProp.face} card__` + this.wronAnsw(cardProp.last_answer)}>
         <div className="card__side card__side--front">
           <div className="card__score">
             <div className="row">
@@ -88,7 +89,7 @@ class Card extends Component {
           </div>
           <Answers lastAnswer={cardProp.last_answer} answered={cardProp.answered} symbolObj={cardProp.symbolObj} click={this.props.click_answer} />
         </div>
-        <div className="card__side card__side--back" onClick={this.props.flip}>
+        <div className="card__side card__side--back" onClick={() => this.props.next_question(cardProp)}>
           <div className="card__back--inner">
             <div className="card__back--symbol card__back--flex">
               {cardProp.symbolObj.symbol}
@@ -111,5 +112,6 @@ export default connect(state => ({ card: state.card }), {
   flip,
   click_answer,
   initiate_score,
-  reset_last_answer
+  reset_last_answer,
+  next_question
 })(Card);

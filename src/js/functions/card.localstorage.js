@@ -76,6 +76,7 @@ export const getPastScore = () => {
 
 //get the CardScore from the localforage from the state
 export const getCardScore = ( state ) => {
+    console.log(" getCardScore state", state);
     return new Promise((resolve, reject) => {
       const index = state.symbolObj.index;
       getKeyValue(index)

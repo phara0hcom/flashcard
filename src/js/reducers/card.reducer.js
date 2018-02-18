@@ -5,7 +5,10 @@ import {
   INITIATE_SCORES_FULFILLED,
   INITIATE_SCORES_REJECTED,
   UPDATE_SCORES,
-  RESET_LAST_ANSWER
+  RESET_LAST_ANSWER,
+  NEXT_QUESTION_PENDING,
+  NEXT_QUESTION_FULFILLED,
+  NEXT_QUESTION_REJECTED
 } from "../constants/card.constant";
 
 import { FLIPcard, checkAnswer } from "../functions/card.reducer";
@@ -16,6 +19,7 @@ import { basicHiragana } from "../decks/hiragana";
 const initialState = {
   face: "UP",
   deck: "basicHiragana",
+  deckFunc: "RANDOM",
   fetchingScore: false,
   fetchScoreError: false,
   symbolNr: 0,
@@ -84,11 +88,39 @@ const card = (state = initialState, action) => {
         last_answer: null
       };
 
+    case NEXT_QUESTION_PENDING:
+      console.log("NEXT_QUESTION_PENDING");
+      return { 
+        ...state,
+        fetchingScore: true
+      };
+
+    case NEXT_QUESTION_REJECTED:
+      console.log("NEXT_QUESTION_REJECTED");
+      return { 
+        ...state,
+        fetchingScore: false,
+        fetchScoreError: true
+      };
+
+    case NEXT_QUESTION_FULFILLED:
+      console.log("NEXT_QUESTION_FULFILLED");
+      console.log("action.payload", action.payload);
+      return { 
+        ...state,
+        fetchingScore: false,
+        face: "UP",
+        answered: [],
+        symbolObj: action.payload.symbolObj,
+        cardScore: action.payload.cardScore,
+        symbolNr: action.payload.symbolNr
+      };
+
     default:
 
       return { 
         ...state,
-        symbolObj: getCurrentSymbol(state)
+        symbolObj: getCurrentSymbol(state.deck, state.symbolNr)
       };
   }
 };

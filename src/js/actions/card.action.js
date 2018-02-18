@@ -3,10 +3,12 @@ import {
   ANSWER_QUESTION,
   INITIATE_SCORES,
   UPDATE_SCORES,
-  RESET_LAST_ANSWER
+  RESET_LAST_ANSWER,
+  NEXT_QUESTION
 } from "../constants/card.constant";
 
 import { getAllScores } from "../functions/card.localstorage";
+import { chooseNext } from "../functions/card.actions";
 
 
 export const flip = () => {
@@ -40,10 +42,20 @@ export const initiate_score = (state) => {
   };
 }
 
-export const reset_last_answer = state => {
+export const reset_last_answer = (state) => {
 
   return { 
     type: RESET_LAST_ANSWER
   };
 
 }
+
+export const next_question = (state) => {
+  //console.log("chooseNext", chooseNext(state) );
+  return { 
+    type: NEXT_QUESTION,
+    payload: chooseNext(state)
+  };
+
+}
+
