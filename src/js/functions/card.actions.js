@@ -20,7 +20,7 @@ export const chooseNext = (state) => {
 
 } 
 
-const chooseNextSyNr = (state) => {
+export const chooseNextSyNr = (state) => {
     const deck = returnDeck(state);
 
     switch (state.deckFunc) {

@@ -3,85 +3,101 @@ export const basicHiragana = [
   {
     index: "Hira_∅_a",
     symbol: "あ",
-    roman: "a"
+    roman: "a",
+    wrong_answers: ["nu", "o", "ta", "me" ]
   },
   {
     index: "Hira_∅_i",
     symbol: "い",
-    roman: "i"
+    roman: "i",
+    wrong_answers: ["ni", "ko", "e", "ha" ]
   },
   {
     index: "Hira_∅_u",
     symbol: "う",
-    roman: "u"
+    roman: "u",
+    wrong_answers: ["ro", "ra", "chi", "sa"]
   },
   {
     index: "Hira_∅_e",
     symbol: "え",
-    roman: "e"
+    roman: "e",
+    wrong_answers: ["wo", "so", "me", "zo"]
   },
   {
     index: "Hira_∅_o",
     symbol: "お",
-    roman: "o"
+    roman: "o",
+    wrong_answers: ["wa", "re", "na", "ne"]
   },
   //K
   {
     index: "Hira_K_a",
     symbol: "か",
-    roman: "ka"
+    roman: "ka",
+    wrong_answers: ["ga", "wa", "no", "ku"]
   },
   {
     index: "Hira_K_i",
     symbol: "き",
-    roman: "ki"
+    roman: "ki",
+    wrong_answers: ["gi", "ro", "sa", "ka"]
   },
   {
     index: "Hira_K_u",
     symbol: "く",
-    roman: "ku"
+    roman: "ku",
+    wrong_answers: ["gu", "be", "he", "ko"]
   },
   {
     index: "Hira_K_e",
     symbol: "け",
-    roman: "ke"
+    roman: "ke",
+    wrong_answers: ["ha", "ta", "ho", "da"]
   },
   {
     index: "Hira_K_o",
     symbol: "こ",
-    roman: "ko"
+    roman: "ko",
+    wrong_answers: ["go", "ta", "ni", "ho"]
   },
   //S
   {
     index: "Hira_S_a",
     symbol: "さ",
-    roman: "sa"
+    roman: "sa",
+    wrong_answers: ["ki", "ru", "se", "so"]
   },
   {
     index: "Hira_S_i",
     symbol: "し",
-    roman: "shi"
+    roman: "shi",
+    wrong_answers: ["ji", "ja", "chi", "so"]
   },
   {
     index: "Hira_S_u",
     symbol: "す",
-    roman: "su"
+    roman: "su",
+    wrong_answers: ["zu", "ta", "mu", "fu"]
   },
   {
     index: "Hira_S_e",
     symbol: "せ",
-    roman: "se"
+    roman: "se",
+    wrong_answers: ["ze", "sa", "mi", "ze"]
   },
   {
     index: "Hira_S_o",
     symbol: "そ",
-    roman: "so"
+    roman: "so",
+    wrong_answers: ["zo", "wo", "se", "sa"]
   },
   //T
   {
     index: "Hira_T_a",
     symbol: "た",
-    roman: "ta"
+    roman: "ta",
+    wrong_answers: ["na", "wa", "da", "wo"]
   },
   {
     index: "Hira_T_i",

@@ -11,6 +11,7 @@ import {
   NEXT_QUESTION_REJECTED
 } from "../constants/card.constant";
 
+import { chooseNextSyNr } from "../functions/card.actions";
 import { FLIPcard, checkAnswer } from "../functions/card.reducer";
 import { getPastScore, getCardScore } from "../functions/card.localstorage";
 import { getCurrentSymbol } from "../functions/card.decks";
@@ -92,6 +93,7 @@ const card = (state = initialState, action) => {
       console.log("NEXT_QUESTION_PENDING");
       return { 
         ...state,
+        face: "UP",
         fetchingScore: true
       };
 
@@ -109,7 +111,6 @@ const card = (state = initialState, action) => {
       return { 
         ...state,
         fetchingScore: false,
-        face: "UP",
         answered: [],
         symbolObj: action.payload.symbolObj,
         cardScore: action.payload.cardScore,
@@ -118,9 +119,11 @@ const card = (state = initialState, action) => {
 
     default:
 
+      const symbolNr = chooseNextSyNr(state);
       return { 
         ...state,
-        symbolObj: getCurrentSymbol(state.deck, state.symbolNr)
+        symbolNr,
+        symbolObj: getCurrentSymbol(state.deck, symbolNr)
       };
   }
 };
