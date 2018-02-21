@@ -92,6 +92,7 @@ class Card extends Component {
           <div className="card__front--symbol">{cardProp.symbolObj.symbol}</div>
           <Answers
             lastAnswer={cardProp.last_answer}
+            answers={cardProp.answers}
             answered={cardProp.answered}
             symbolObj={cardProp.symbolObj}
             click={this.props.click_answer}

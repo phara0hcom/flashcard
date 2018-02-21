@@ -12,7 +12,7 @@ import {
 } from "../constants/card.constant";
 
 import { chooseNextSyNr } from "../functions/card.actions";
-import { FLIPcard, checkAnswer } from "../functions/card.reducer";
+import { FLIPcard, checkAnswer, createAnswer } from "../functions/card.reducer";
 import { getPastScore, getCardScore } from "../functions/card.localstorage";
 import { getCurrentSymbol } from "../functions/card.decks";
 import { basicHiragana } from "../decks/hiragana";
@@ -25,6 +25,7 @@ const initialState = {
   fetchScoreError: false,
   symbolNr: 0,
   last_answer: null,
+  answers: [],
   answered: [],
   score: {
     questions_failed: 0,
@@ -43,11 +44,9 @@ const initialState = {
 const card = (state = initialState, action) => {
   switch (action.type) {
     case FLIP:
-    
       return FLIPcard(state.face, state);
 
     case ANSWER_QUESTION:
-
       return checkAnswer(state, action);
 
     //might not need this
@@ -61,14 +60,14 @@ const card = (state = initialState, action) => {
 
     case INITIATE_SCORES_PENDING:
       console.log("INITIATE_SCORES_PENDING");
-      return { 
+      return {
         ...state,
         fetchingScore: true
       };
 
     case INITIATE_SCORES_FULFILLED:
       console.log("INITIATE_SCORES_FULFILLED");
-      return { 
+      return {
         ...state,
         fetchingScore: false,
         pastScore: action.payload.pastScore,
@@ -77,21 +76,21 @@ const card = (state = initialState, action) => {
 
     case INITIATE_SCORES_REJECTED:
       console.log("INITIATE_SCORES_REJECTED");
-      return { 
+      return {
         ...state,
         fetchingScore: false,
         fetchScoreError: true
       };
 
     case RESET_LAST_ANSWER:
-      return { 
+      return {
         ...state,
         last_answer: null
       };
 
     case NEXT_QUESTION_PENDING:
       console.log("NEXT_QUESTION_PENDING");
-      return { 
+      return {
         ...state,
         face: "UP",
         fetchingScore: true
@@ -99,7 +98,7 @@ const card = (state = initialState, action) => {
 
     case NEXT_QUESTION_REJECTED:
       console.log("NEXT_QUESTION_REJECTED");
-      return { 
+      return {
         ...state,
         fetchingScore: false,
         fetchScoreError: true
@@ -108,22 +107,24 @@ const card = (state = initialState, action) => {
     case NEXT_QUESTION_FULFILLED:
       console.log("NEXT_QUESTION_FULFILLED");
       console.log("action.payload", action.payload);
-      return { 
+      return {
         ...state,
         fetchingScore: false,
         answered: [],
+        answers: createAnswer(action.payload.symbolObj),
         symbolObj: action.payload.symbolObj,
         cardScore: action.payload.cardScore,
         symbolNr: action.payload.symbolNr
       };
 
     default:
-
       const symbolNr = chooseNextSyNr(state);
-      return { 
+      const symbolObj = getCurrentSymbol(state.deck, symbolNr);
+      return {
         ...state,
         symbolNr,
-        symbolObj: getCurrentSymbol(state.deck, symbolNr)
+        symbolObj,
+        answers: createAnswer(symbolObj)
       };
   }
 };

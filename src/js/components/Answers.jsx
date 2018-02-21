@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-let answers = [];
 
 class Answers extends Component {
-  componentWillMount() {
-    const correctKey = Math.floor(Math.random() * 4);
+  constructor(props) {
+    super(props);
 
-    for (let i = 0; i < 4; i++) {
-      if (i === correctKey) {
-        answers.push({
-          symbol: this.props.symbolObj.roman,
-          correct: true
-        });
-      } else {
-        answers.push({
-          symbol: this.props.symbolObj.wrong_answers[i],
-          correct: false
-        });
-      }
-    }
-    console.log("answers", answers);
+    this.state = { answers: [] };
   }
 
-  createAnswer(answer, key) {
+  componentWillMount() {
+    //this.createAnswer();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      "componentWillReceiveProps >> this.props.symbolObj",
+      this.props.symbolObj
+    );
+    console.log(
+      "componentWillReceiveProps >> nextProps.symbolObj",
+      nextProps.symbolObj
+    );
+    if (this.props.symbolObj !== nextProps.symbolObj) {
+      //this.createAnswer();
+    }
+  }
+
+  createAnswerJSX(answer, key) {
     console.log("createAnswer > answer", answer);
     console.log("createAnswer > key", key);
     const stringKey = key + "";
@@ -55,7 +59,7 @@ class Answers extends Component {
   render() {
     return (
       <div className="card__btn-box">
-        {answers.map((data, i) => this.createAnswer(data, i))}
+        {this.props.answers.map((data, i) => this.createAnswerJSX(data, i))}
       </div>
     );
   }
