@@ -16,23 +16,22 @@ class Card extends Component {
     super(props);
   }
 
-  componentDidMount () {
+  componentWillMount() {
     const { store } = this.context;
 
     store.dispatch(initiate_score(this.props.card));
-
   }
 
   wronAnsw(last_answer) {
     const { store } = this.context;
 
-    console.log( last_answer );
-    if ( last_answer === false ) {
+    console.log(last_answer);
+    if (last_answer === false) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
       }, 1200);
-      return 'wrong';
-    } else if ( last_answer === true ) {
+      return "wrong";
+    } else if (last_answer === true) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
       }, 2200);
@@ -44,7 +43,13 @@ class Card extends Component {
 
   render() {
     const cardProp = this.props.card;
-    return <div className={`card card__${cardProp.face} card__` + this.wronAnsw(cardProp.last_answer)}>
+    return (
+      <div
+        className={
+          `card card__${cardProp.face} card__` +
+          this.wronAnsw(cardProp.last_answer)
+        }
+      >
         <div className="card__side card__side--front">
           <div className="card__score">
             <div className="row">
@@ -84,12 +89,18 @@ class Card extends Component {
             </div>
           </div>
 
-          <div className="card__front--symbol">
-            {cardProp.symbolObj.symbol}
-          </div>
-          <Answers lastAnswer={cardProp.last_answer} answered={cardProp.answered} symbolObj={cardProp.symbolObj} click={this.props.click_answer} />
+          <div className="card__front--symbol">{cardProp.symbolObj.symbol}</div>
+          <Answers
+            lastAnswer={cardProp.last_answer}
+            answered={cardProp.answered}
+            symbolObj={cardProp.symbolObj}
+            click={this.props.click_answer}
+          />
         </div>
-        <div className="card__side card__side--back" onClick={() => this.props.next_question(cardProp)}>
+        <div
+          className="card__side card__side--back"
+          onClick={() => this.props.next_question(cardProp)}
+        >
           <div className="card__back--inner">
             <div className="card__back--symbol card__back--flex">
               {cardProp.symbolObj.symbol}
@@ -100,13 +111,13 @@ class Card extends Component {
             </div>
           </div>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 Card.contextTypes = {
   store: PropTypes.object
 };
-
 
 export default connect(state => ({ card: state.card }), {
   flip,

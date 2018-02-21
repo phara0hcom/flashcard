@@ -4,13 +4,13 @@ export const basicHiragana = [
     index: "Hira_∅_a",
     symbol: "あ",
     roman: "a",
-    wrong_answers: ["nu", "o", "ta", "me" ]
+    wrong_answers: ["nu", "o", "ta", "me"]
   },
   {
     index: "Hira_∅_i",
     symbol: "い",
     roman: "i",
-    wrong_answers: ["ni", "ko", "e", "ha" ]
+    wrong_answers: ["ni", "ko", "e", "ha"]
   },
   {
     index: "Hira_∅_u",
@@ -97,168 +97,199 @@ export const basicHiragana = [
     index: "Hira_T_a",
     symbol: "た",
     roman: "ta",
-    wrong_answers: ["na", "wa", "da", "wo"]
+    wrong_answers: ["ni", "na", "wo", "ha"]
   },
   {
     index: "Hira_T_i",
     symbol: "ち",
-    roman: "chi"
+    roman: "chi",
+    wrong_answers: ["u", "ra", "ro", "shi"]
   },
   {
     index: "Hira_T_u",
     symbol: "つ",
-    roman: "tsu"
+    roman: "tsu",
+    wrong_answers: ["zu", "u", "te", "su"]
   },
   {
     index: "Hira_T_e",
     symbol: "て",
-    roman: "te"
+    roman: "te",
+    wrong_answers: ["de", "ro", "se", "ta"]
   },
   {
     index: "Hira_T_o",
     symbol: "と",
-    roman: "to"
+    roman: "to",
+    wrong_answers: ["do", "chi", "ru", "te"]
   },
   //N
   {
     index: "Hira_N_a",
     symbol: "な",
-    roman: "na"
+    roman: "na",
+    wrong_answers: ["ha", "ta", "da", "ne"]
   },
   {
     index: "Hira_N_i",
     symbol: "に",
-    roman: "ni"
+    roman: "ni",
+    wrong_answers: ["ha", "i", "ta", "ki"]
   },
   {
     index: "Hira_N_u",
     symbol: "ぬ",
-    roman: "nu"
+    roman: "nu",
+    wrong_answers: ["me", "wi", "a", "ne"]
   },
   {
     index: "Hira_N_e",
     symbol: "ね",
-    roman: "ne"
+    roman: "ne",
+    wrong_answers: ["wa", "re", "ru", "na"]
   },
   {
     index: "Hira_N_o",
     symbol: "の",
-    roman: "no"
+    roman: "no",
+    wrong_answers: ["ri", "wa", "me", "ne"]
   },
   //H
   {
     index: "Hira_H_a",
     symbol: "は",
-    roman: "ha[ɰa]"
+    roman: "ha",
+    wrong_answers: ["ho", "ke", "wa", "hi"]
   },
   {
     index: "Hira_H_i",
     symbol: "ひ",
-    roman: "hi"
+    roman: "hi",
+    wrong_answers: ["bi", "pi", "no", "he"]
   },
   {
     index: "Hira_H_u",
     symbol: "ふ",
-    roman: "fu"
+    roman: "fu",
+    wrong_answers: ["bu", "pu", "he", "fi"]
   },
   {
     index: "Hira_H_e",
     symbol: "へ",
-    roman: "he[e]"
+    roman: "he",
+    wrong_answers: ["be", "pe", "ku", "hi"]
   },
   {
     index: "Hira_H_o",
     symbol: "ほ",
-    roman: "ho"
+    roman: "ho",
+    wrong_answers: ["ha", "ke", "ma", "he"]
   },
   //M
   {
     index: "Hira_M_a",
     symbol: "ま",
-    roman: "ma"
+    roman: "ma",
+    wrong_answers: ["ho", "ha", "ke", "mo"]
   },
   {
     index: "Hira_M_i",
     symbol: "み",
-    roman: "mi"
+    roman: "mi",
+    wrong_answers: ["na", "yo", "ha", "ni"]
   },
   {
     index: "Hira_M_u",
     symbol: "む",
-    roman: "mu"
+    roman: "mu",
+    wrong_answers: ["mo", "su", "n", "ru"]
   },
   {
     index: "Hira_M_e",
     symbol: "め",
-    roman: "me"
+    roman: "me",
+    wrong_answers: ["nu", "wi", "a", "ru"]
   },
   {
     index: "Hira_M_o",
     symbol: "も",
-    roman: "mo"
+    roman: "mo",
+    wrong_answers: ["mu", "shi", "hi", "me"]
   },
   //Y
   {
     index: "Hira_Y_a",
     symbol: "や",
-    roman: "ya"
+    roman: "ya",
+    wrong_answers: ["yu", "tsu", "yo", "pi"]
   },
   {
     index: "Hira_Y_u",
     symbol: "ゆ",
-    roman: "yu"
+    roman: "yu",
+    wrong_answers: ["ya", "tsu", "yo", "pi"]
   },
   {
     index: "Hira_Y_o",
     symbol: "よ",
-    roman: "yo"
+    roman: "yo",
+    wrong_answers: ["ha", "ma", "yu", "ya"]
   },
   //R
   {
     index: "Hira_R_a",
     symbol: "ら",
-    roman: "ra"
+    roman: "ra",
+    wrong_answers: ["ro", "chi", "u", "sa"]
   },
   {
     index: "Hira_R_i",
     symbol: "り",
-    roman: "ri"
+    roman: "ri",
+    wrong_answers: ["i", "ke", "no", "re"]
   },
   {
     index: "Hira_R_u",
     symbol: "る",
-    roman: "ru"
+    roman: "ru",
+    wrong_answers: ["ro", "te", "wi", "ro"]
   },
   {
     index: "Hira_R_e",
     symbol: "れ",
-    roman: "re"
+    roman: "re",
+    wrong_answers: ["wa", "ne", "wi", "ro"]
   },
   {
     index: "Hira_R_o",
     symbol: "ろ",
-    roman: "ro"
+    roman: "ro",
+    wrong_answers: ["ru", "te", "to", "re"]
   },
   //W
   {
     index: "Hira_W_a",
     symbol: "わ",
-    roman: "wa"
+    roman: "wa",
+    wrong_answers: ["re", "ne", "ra", "wo"]
   },
   {
     index: "Hira_W_i",
     symbol: "ゐ",
-    roman: "wi"
+    roman: "wi",
+    wrong_answers: ["ru", "me", "a", "ki"]
   },
   {
     index: "Hira_W_o",
     symbol: "を",
-    roman: "wo"
+    roman: "wo",
+    wrong_answers: ["na", "ta", "ne", "wa"]
   },
   {
     index: "Hira_N",
     symbol: "ん",
-    roman: "n"
+    roman: "n",
+    wrong_answers: ["mu", "no", "mo", "na"]
   }
 ];
 
@@ -394,10 +425,3 @@ export const dakutenHiragana = [
     roman: "po"
   }
 ];
-
-
-
-
-
-
-
