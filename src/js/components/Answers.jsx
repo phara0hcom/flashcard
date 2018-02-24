@@ -2,30 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Answers extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { answers: [] };
-  }
-
-  componentWillMount() {
-    //this.createAnswer();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(
-      "componentWillReceiveProps >> this.props.symbolObj",
-      this.props.symbolObj
-    );
-    console.log(
-      "componentWillReceiveProps >> nextProps.symbolObj",
-      nextProps.symbolObj
-    );
-    if (this.props.symbolObj !== nextProps.symbolObj) {
-      //this.createAnswer();
-    }
-  }
-
   createAnswerJSX(answer, key) {
     console.log("createAnswer > answer", answer);
     console.log("createAnswer > key", key);
