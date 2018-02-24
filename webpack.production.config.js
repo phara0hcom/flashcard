@@ -1,9 +1,9 @@
-const webpack = require('webpack'); // webpack itself
-const path = require('path'); // nodejs dependency when dealing with paths
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'); // require webpack plugin
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // require webpack plugin
+const webpack = require("webpack"); // webpack itself
+const path = require("path"); // nodejs dependency when dealing with paths
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"); // require webpack plugin
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // require webpack plugin
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin'); // require webpack plugin
+const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin"); // require webpack plugin
 
 module.exports = {
   // config object
@@ -35,29 +35,14 @@ module.exports = {
     rules: [
       // loader rules
       {
-        test: /\.js$/, // files ending with .js
+        test: /\.(js|jsx)$/, // files ending with .js
+        exclude: /node_modules/, // exclude the node_modules directory
         loader: "babel-loader" // use this (babel-core) loader
       },
       {
-        test: /\.css$/,
-        use: ExtractTextWebpackPlugin.extract({
-          // call our plugin with extract method
-          use: ["css-loader", "postcss-loader", "sass-loader"], // use these loaders
-          fallback: "style-loader" // fallback for any CSS not extracted
-        }) // end extract
-      },
-
-      {
-        test: /\.jsx$/, // all files ending with .jsx
-        loader: "babel-loader" // use the babel-loader for all .jsx files
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextWebpackPlugin.extract({
-          // call our plugin with extract method
-          use: ["css-loader", "postcss-loader", "sass-loader"], // use these loaders
-          fallback: "style-loader" // fallback for any CSS not extracted
-        }) // end extract
+        test: /\.(scss|css)$/,
+        loaders: ["style-loader", "postcss-loader", "sass-loader"],
+        exclude: /node_modules/
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -104,7 +89,7 @@ module.exports = {
       Promise: "es6-promise-promise"
     }),
     new OptimizeCSSAssets(), // call the css optimizer (minfication)
-    new webpack.optimize.UglifyJsPlugin(), // call the uglify plugin
+    new webpack.optimize.UglifyJsPlugin() // call the uglify plugin
     //new ExtractTextWebpackPlugin("styles.css") // call the ExtractTextWebpackPlugin constructor and name our css file
   ]
 };
