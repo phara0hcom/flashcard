@@ -28,12 +28,12 @@ class Card extends Component {
     if (last_answer === false) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
-      }, 1200);
+      }, 800);
       return "wrong";
     } else if (last_answer === true) {
       setTimeout(() => {
         store.dispatch(reset_last_answer());
-      }, 2200);
+      }, 800);
       return "correct";
     } else {
       return "nothing";
