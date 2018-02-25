@@ -76,9 +76,15 @@ module.exports = {
   plugins: [
     // webpack plugins
     new HtmlWebpackPlugin({
-      template: `${__dirname}/public/index.html`,
+      template: `${__dirname}/src/index.html`,
       filename: "index.html",
-      inject: "body"
+      inject: "body",
+      minify: {
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true
+      }
     }),
     new webpack.DefinePlugin({
       "process.env": {

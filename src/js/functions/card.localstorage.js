@@ -2,7 +2,7 @@ import localforage from "localforage";
 import { returnDeck } from "./card.decks";
 
 localforage.config({
-  driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+  driver: localforage.INDEXEDDB, // Force WebSQL; same as using setDriver()
   name: "cardScoreStorage",
   version: 1.0,
   size: 4980736, // Size of database, in bytes. WebSQL-only for now.
@@ -22,7 +22,7 @@ const getKeyValue = key => {
         reject(err);
       });
   });
-}
+};
 
 // save a key
 export const saveKey = (key, value) => {
@@ -40,116 +40,109 @@ export const saveKey = (key, value) => {
         reject(err);
       });
   });
-}
+};
 
 // gets the past score out of the localDB storage
 export const getPastScore = () => {
-    return new Promise( (resolve, reject) => {
-        console.log("getPastScore Function ");
-        getKeyValue("pastScore")
-        .then(pastScore => {
-            console.log("Saved Paste", pastScore);
-            // if null then store empty score card is saved
-            if (!pastScore) {
-                saveKey("pastScore", {
-                    questions_failed: 0,
-                    questions_correct: 0
-                })
-                .then(value => {
-                    resolve(  value );
-                })
-                .catch(err => {
-                    console.log("Error", err);
-                    reject( err );
-                });
-            } else {
-                // return pastScrore that was saved in a previous session
-                resolve(  pastScore );
-            }
-        })
-        .catch(err => {
-            console.log("getPastScore Error", err);
-            reject( err );
-        });
-    });
+  return new Promise((resolve, reject) => {
+    console.log("getPastScore Function ");
+    getKeyValue("pastScore")
+      .then(pastScore => {
+        console.log("Saved Paste", pastScore);
+        // if null then store empty score card is saved
+        if (!pastScore) {
+          saveKey("pastScore", {
+            questions_failed: 0,
+            questions_correct: 0
+          })
+            .then(value => {
+              resolve(value);
+            })
+            .catch(err => {
+              console.log("Error", err);
+              reject(err);
+            });
+        } else {
+          // return pastScrore that was saved in a previous session
+          resolve(pastScore);
+        }
+      })
+      .catch(err => {
+        console.log("getPastScore Error", err);
+        reject(err);
+      });
+  });
 };
 
 //get the CardScore from the localforage from the state
-export const getCardScore = ( state ) => {
-    console.log(" getCardScore state", state);
-    return new Promise((resolve, reject) => {
-      const index = state.symbolObj.index;
-      getKeyValue(index)
-        .then(cardScore => {
-          if (!cardScore) {
-
-            saveKey(index, {
-              questions_failed: 0,
-              questions_correct: 0
-            })
+export const getCardScore = state => {
+  console.log(" getCardScore state", state);
+  return new Promise((resolve, reject) => {
+    const index = state.symbolObj.index;
+    getKeyValue(index)
+      .then(cardScore => {
+        if (!cardScore) {
+          saveKey(index, {
+            questions_failed: 0,
+            questions_correct: 0
+          })
             .then(value => {
               console.log("saved", value);
-              resolve( value );
+              resolve(value);
             })
             .catch(err => {
               console.log("ERROR save", err);
-              reject( err );
+              reject(err);
             });
+        } else {
+          resolve(cardScore);
+        }
+      })
+      .catch(err => {
+        console.log("getCardScore Error", err);
+        reject(err);
+      });
+  });
+};
 
-          } else {
-            resolve(cardScore);
-          }
-        })
-        .catch(err => {
-          console.log("getCardScore Error", err);
-          reject( err );
-        });
+export const getAllScores = state => {
+  return Promise.all([getPastScore(state), getCardScore(state)])
+    .then(values => {
+      console.log("getAllScores", values);
+      return {
+        pastScore: values[0],
+        cardScore: values[1]
+      };
+    })
+    .catch(err => {
+      console.log("getAllScores ERROR", err);
+      return err;
     });
 };
 
-
-export const getAllScores = ( state ) => {
-    return Promise.all([
-        getPastScore( state ),
-        getCardScore( state )
-    ])
-    .then( values => {
-      console.log("getAllScores", values);
-      return { 
-          pastScore: values[0],
-          cardScore: values[1]
-      };
-
-    })
-    .catch( err => {
-        console.log("getAllScores ERROR", err);
-        return err;
-    })
-}
-
 export const updateCardScore = (state, corrAnswerd) => {
-    const index = state.symbolObj.index;
-    let CardScore = state.cardScore;
-    console.log("updateCardScore >> CardScore", CardScore);
-    console.log("updateCardScore >> corrAnswerd", corrAnswerd);
+  const index = state.symbolObj.index;
+  let CardScore = state.cardScore;
+  console.log("updateCardScore >> CardScore", CardScore);
+  console.log("updateCardScore >> corrAnswerd", corrAnswerd);
 
-    if ( corrAnswerd ) {
-      CardScore = {
-        ...CardScore,
-        questions_correct: CardScore.questions_correct + 1
-      };
-    } else {
-      CardScore = {
-        ...CardScore,
-        questions_failed: CardScore.questions_failed + 1
-      };
-    }
+  if (corrAnswerd) {
+    CardScore = {
+      ...CardScore,
+      questions_correct: CardScore.questions_correct + 1
+    };
+  } else {
+    CardScore = {
+      ...CardScore,
+      questions_failed: CardScore.questions_failed + 1
+    };
+  }
 
-    saveKey(index, CardScore)
-    .then( value => {
+  saveKey(index, CardScore)
+    .then(value => {
       console.log("updateCardScore >> saveKey", value);
     })
-    .catch( err =>{
+    .catch(err => {
       console.log("updateCardScore >> saveKey", err);
-    })
-}
+    });
+};

@@ -52,7 +52,7 @@ class Card extends Component {
         <div className="card__side card__side--front">
           <div className="card__score">
             <div className="row">
-              <div className="col-1-of-3 card__score--current u-margin-bottom-medium">
+              <div className="col-1-of-3 card__score--current u-margin-bottom-small">
                 <div className="">Session Score</div>
                 <div className="">
                   <span>&radic; </span>
@@ -63,8 +63,8 @@ class Card extends Component {
                   {cardProp.score.questions_failed}
                 </div>
               </div>
-              <div className="col-1-of-3 card__score--currentCard u-margin-bottom-medium">
-                <div className="">Score for this Card</div>
+              <div className="col-1-of-3 card__score--currentCard u-margin-bottom-small">
+                <div className="">This Card</div>
                 <div className="">
                   <span>&radic; </span>
                   {cardProp.cardScore.questions_correct}
@@ -74,8 +74,8 @@ class Card extends Component {
                   {cardProp.cardScore.questions_failed}
                 </div>
               </div>
-              <div className="col-1-of-3 card__score--currentCard u-margin-bottom-medium">
-                <div className="">Past Score</div>
+              <div className="col-1-of-3 card__score--currentCard u-margin-bottom-small">
+                <div className="">Total Score</div>
                 <div className="">
                   <span>&radic; </span>
                   {cardProp.pastScore.questions_correct}

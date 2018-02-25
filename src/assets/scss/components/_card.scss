@@ -18,7 +18,7 @@
     border-radius: $default-border-radius-card;
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
     overflow: hidden;
-    transition: all 0.5s;
+    transition: all 0.4s;
     opacity: 1;
 
     &--front {
@@ -52,20 +52,24 @@
   &__DOWN {
     & .card__side--front {
       animation-name: cardCorrect;
-      animation-duration: 1.8s;
-      transition-delay: 2s;
+      animation-duration: 0.8s;
+      transition-delay: 0.7s;
       transform: rotateY(-180deg);
       position: relative;
     }
     & .card__side--back {
-      transition-delay: 2s;
+      transition-delay: 0.7s;
       transform: rotateY(0deg);
+    }
+  }
+  &__UP {
+    & .card__side--back .card__back--inner {
+      opacity: 0;
     }
   }
   &__btn-box {
     padding: 0 5rem;
   }
-
   &__score {
     background-color: $color-gray-dark-3;
     color: $color-white;
@@ -73,6 +77,7 @@
     padding: 1rem 2rem;
     text-align: left;
     margin-bottom: $margin-medium;
+    font-size: 1.37rem;
     &-current {
       float: left;
       width: 50%;
@@ -98,7 +103,7 @@
   &__wrong {
     & .card__side--front {
       animation-name: cardFail;
-      animation-duration: 1s;
+      animation-duration: 0.8s;
     }
   }
 }
