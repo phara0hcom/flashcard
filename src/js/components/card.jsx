@@ -21,7 +21,7 @@ class Card extends Component {
     store.dispatch(initiate_score(this.props.card));
   }
 
-  wronAnsw(last_answer) {
+  wrongAnsw(last_answer) {
     const { store } = this.context;
 
     console.log(last_answer);
@@ -46,7 +46,7 @@ class Card extends Component {
       <div
         className={
           `card card__${cardProp.face} card__` +
-          this.wronAnsw(cardProp.last_answer)
+          this.wrongAnsw(cardProp.last_answer)
         }
       >
         <div className="card__side card__side--front">

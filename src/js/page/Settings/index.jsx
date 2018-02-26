@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-import Styles from "../../../assets/scss/pages/_home";
+import Styles from "../../../assets/scss/pages/_settings";
 
-import Card from "../../components/Card";
+import Settings from "../../components/Settings";
 
 export default class extends Component {
   render() {
     return (
       <div>
-        <Card />
+        <Settings />
       </div>
     );
   }
