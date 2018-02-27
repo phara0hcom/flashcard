@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {
   flip,
   click_answer,
-  initiate_score,
+  initiate_app,
   update_scores,
   reset_last_answer,
   next_question
@@ -18,7 +18,7 @@ class Card extends Component {
 
   componentWillMount() {
     const { store } = this.context;
-    store.dispatch(initiate_score(this.props.card));
+    store.dispatch(initiate_app(this.props.card));
   }
 
   wrongAnsw(last_answer) {
@@ -42,6 +42,15 @@ class Card extends Component {
 
   render() {
     const cardProp = this.props.card;
+    console.log("cardProp.cardState", cardProp.cardState);
+    if (cardProp.cardState === "LOADING") {
+      return (
+        <div className="card card__UP card__nothing">
+          <div className="card__side card__side--front">LOADING</div>
+        </div>
+      );
+    }
+
     return (
       <div
         className={
@@ -122,7 +131,7 @@ Card.contextTypes = {
 export default connect(state => ({ card: state.card }), {
   flip,
   click_answer,
-  initiate_score,
+  initiate_app,
   reset_last_answer,
   next_question
 })(Card);

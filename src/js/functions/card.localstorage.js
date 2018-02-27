@@ -105,6 +105,36 @@ export const getCardScore = state => {
   });
 };
 
+export const getSettings = stateSettings => {
+  return new Promise((resolve, reject) => {
+    getKeyValue("appSettings")
+      .then(settings => {
+        if (!settings) {
+          saveKey("appSettings", stateSettings)
+            .then(value => {
+              console.log("getSettings >> saveKey Saved", value);
+              resolve(value);
+            })
+            .catch(err => {
+              console.log("ERROR getSettings >> saveKey", err);
+              reject(err);
+            });
+        } else {
+          console.log("getSettings >> settings", {
+            ...stateSettings,
+            settings
+          });
+          resolve({ ...stateSettings, settings });
+        }
+      })
+      .catch(err => {
+        console.log("ERROR getSettings", err);
+        reject(err);
+      });
+  });
+};
+
+//getAll scores
 export const getAllScores = state => {
   return Promise.all([getPastScore(state), getCardScore(state)])
     .then(values => {

@@ -1,5 +1,11 @@
 import { getCurrentSymbol } from "./card.decks";
-import { saveKey, updateCardScore } from "./card.localstorage";
+import {
+  saveKey,
+  updateCardScore,
+  getSettings,
+  getAllScores
+} from "./card.localstorage";
+import { chooseNextSyNr } from "../functions/card.actions";
 
 export const FLIPcard = (current, state) => {
   switch (current) {
@@ -75,4 +81,36 @@ export const checkAnswer = (state, action) => {
     cardScore: calScore(state.cardScore, corrAnswerd),
     pastScore: calScore(state.pastScore, corrAnswerd)
   };
+};
+
+// To initialize the app we get past scores and settings
+export const getScoresSettings = state => {
+  return new Promise((resolve, reject) => {
+    getSettings(state.settings).then(settings => {
+      const NewState = {
+        ...state,
+        settings
+      };
+      const symbolNr = chooseNextSyNr(NewState);
+      const symbolObj = getCurrentSymbol(NewState, symbolNr);
+      console.log("getScoresSettings symbolNr", symbolNr);
+      console.log("getScoresSettings symbolObj", symbolObj);
+      getAllScores({
+        ...NewState,
+        symbolNr,
+        symbolObj
+      }).then(allScores => {
+        console.log("RETURN getScoresSettings >>>> ", {
+          ...allScores,
+          settings
+        });
+        resolve({
+          ...allScores,
+          settings,
+          symbolNr,
+          symbolObj
+        });
+      });
+    });
+  });
 };

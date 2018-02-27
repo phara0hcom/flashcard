@@ -1,11 +1,22 @@
 import decks from "../decks";
 
+export const returnDeck = state => {
+  return decks[state.settings.deck];
+};
 
-export const returnDeck = ( state ) => {
+export const getCurrentSymbol = (state, symbolNr) => {
+  switch (state.settings.deckFunc) {
+    case "RANDOM":
+      return decks[state.settings.deck][symbolNr];
+      break;
 
-    return decks[state.deck];
-}
+    case "RANDOM_IN_DECK":
+      if (symbolNr === 0) {
+        //create custom Deck
+      }
 
-export const getCurrentSymbol = ( deck , symbolNr ) => {
-    return decks[deck][symbolNr];
+    default:
+      return decks[state.settings.deck][symbolNr];
+      break;
+  }
 };

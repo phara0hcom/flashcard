@@ -5,7 +5,7 @@ import { getCardScore } from "./card.localstorage";
 // future setting prioritize bad scores
 export const chooseNext = state => {
   const symbolNr = chooseNextSyNr(state);
-  const symbolObj = getCurrentSymbol(state.deck, symbolNr);
+  const symbolObj = getCurrentSymbol(state, symbolNr);
   console.log("chooseNext symbolNr", symbolNr);
   return new Promise((resolve, reject) => {
     getCardScore({ ...state, symbolNr, symbolObj }).then(cardScore => {
@@ -30,13 +30,15 @@ const shuffleArray = a => {
 export const chooseNextSyNr = state => {
   const deck = returnDeck(state);
 
-  switch (state.deckFunc) {
+  switch (state.settings.deckFunc) {
     case "RANDOM":
       return Math.floor(Math.random() * deck.length);
-
       break;
+
+    case "RANDOM_IN_DECK":
+
     default:
-      return Math.floor(Math.random() * deck.length);
+      return state.symbolNr === null ? 0 : state.symbolNr++;
 
       break;
   }
