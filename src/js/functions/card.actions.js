@@ -26,7 +26,7 @@ export const chooseNextSyNr = state => {
       break;
 
     case "RANDOM_IN_DECK":
-      if (state.symbolNr === null) {
+      if (state.symbolNr === null || deck.length - 1 === state.symbolNr) {
         return 0;
       }
       return ++state.symbolNr;

@@ -54,11 +54,11 @@ export const getCurrentSymbol = (state, symbolNr) => {
       return concatDecks[symbolNr];
 
     case "RANDOM_IN_DECK":
-      console.log("getCurrentSymbol symbolNr", symbolNr);
-      console.log(
-        "getCurrentSymbol state.customDeck[symbolNr]",
-        state.customDeck[symbolNr]
-      );
+      // console.log("getCurrentSymbol symbolNr", symbolNr);
+      // console.log(
+      //   "getCurrentSymbol state.customDeck[symbolNr]",
+      //   state.customDeck[symbolNr]
+      // );
       return concatDecks[state.customDeck[symbolNr]];
 
     default:

@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 class Answers extends Component {
   createAnswerJSX(answer, key) {
-    console.log("createAnswer > answer", answer);
-    console.log("createAnswer > key", key);
+    // console.log("createAnswer > answer", answer);
+    // console.log("createAnswer > key", key);
     let disblesAttr = false;
     const stringKey = key + "";
     const correctAnsClass = answer.correct ? " btn-prime-correct" : "";
