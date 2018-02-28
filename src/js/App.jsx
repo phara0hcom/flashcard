@@ -24,11 +24,13 @@ export default class App extends Component {
           <div>
             <Primary />
             <Switch>
-              <Route exact path="/flash" component={Home} />
-              <Route exact path="/flash/settings" component={Settings} />
-              <Route exact path="/flash/about" component={About} />
-              <Route path="/flash/*" component={NotFound} />
-              <Redirect to="/flash" />
+              <main>
+                <Route exact path="/flash" component={Home} />
+                <Route exact path="/flash/settings" component={Settings} />
+                <Route exact path="/flash/about" component={About} />
+                <Route path="/flash/*" component={NotFound} />
+                <Redirect to="/flash" />
+              </main>
             </Switch>
           </div>
         </Router>
