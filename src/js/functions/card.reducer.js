@@ -1,4 +1,4 @@
-import { getCurrentSymbol } from "./card.decks";
+import { getCurrentSymbol, getCustomDeckObj } from "./card.decks";
 import {
   saveKey,
   updateCardScore,
@@ -92,8 +92,11 @@ export const getScoresSettings = state => {
         settings
       };
       const symbolNr = chooseNextSyNr(NewState);
-      const symbolObj = getCurrentSymbol(NewState, symbolNr);
       console.log("getScoresSettings symbolNr", symbolNr);
+      const customDeck = getCustomDeckObj(NewState);
+      console.log("getScoresSettings customDeckObj", customDeck);
+
+      const symbolObj = getCurrentSymbol({ ...NewState, customDeck }, symbolNr);
       console.log("getScoresSettings symbolObj", symbolObj);
       getAllScores({
         ...NewState,
@@ -106,6 +109,7 @@ export const getScoresSettings = state => {
         });
         resolve({
           ...allScores,
+          customDeck,
           settings,
           symbolNr,
           symbolObj

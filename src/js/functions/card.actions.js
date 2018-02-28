@@ -4,27 +4,17 @@ import { getCardScore } from "./card.localstorage";
 //this returns a new keynr for the deck with the costrains of the settings
 // future setting prioritize bad scores
 export const chooseNext = state => {
+  console.log("chooseNext state.symbolNr", state.symbolNr);
   const symbolNr = chooseNextSyNr(state);
-  const symbolObj = getCurrentSymbol(state, symbolNr);
   console.log("chooseNext symbolNr", symbolNr);
+  const symbolObj = getCurrentSymbol(state, symbolNr);
+  console.log("chooseNext symbolObj", symbolObj);
+
   return new Promise((resolve, reject) => {
     getCardScore({ ...state, symbolNr, symbolObj }).then(cardScore => {
       resolve({ symbolNr, cardScore, symbolObj });
     });
   });
-};
-
-/**
- * Shuffles array in place. ES6 version
- * @param {Array} a items An array containing the items.
- */
-
-const shuffleArray = a => {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 };
 
 export const chooseNextSyNr = state => {
@@ -36,9 +26,13 @@ export const chooseNextSyNr = state => {
       break;
 
     case "RANDOM_IN_DECK":
+      if (state.symbolNr === null) {
+        return 0;
+      }
+      return ++state.symbolNr;
 
     default:
-      return state.symbolNr === null ? 0 : state.symbolNr++;
+      return Math.floor(Math.random() * deck.length);
 
       break;
   }

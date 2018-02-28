@@ -25,7 +25,7 @@ const initialState = {
   last_answer: null,
   answers: [],
   answered: [],
-  costumDeck: [],
+  customDeck: [],
   score: {
     questions_failed: 0,
     questions_correct: 0
@@ -40,7 +40,7 @@ const initialState = {
   },
   settings: {
     decks: ["basicHiragana"],
-    deckFunc: "RANDOM"
+    deckFunc: "RANDOM_IN_DECK"
   }
 };
 
@@ -71,12 +71,14 @@ const card = (state = initialState, action) => {
 
     case INITIATE_APP_FULFILLED:
       console.log("INITIATE_APP_FULFILLED");
+      console.log("INITIATE_APP_FULFILLED >> action.payload", action.payload);
       return {
         ...state,
         cardState: "DONE",
         fetchingSavedata: false,
         symbolNr: action.payload.symbolNr,
         symbolObj: action.payload.symbolObj,
+        customDeck: action.payload.customDeck,
         answers: createAnswer(action.payload.symbolObj),
         pastScore: action.payload.pastScore,
         cardScore: action.payload.cardScore,
