@@ -1,5 +1,11 @@
-import { getCurrentSymbol } from "./card.decks";
-import { saveKey, updateCardScore } from "./card.localstorage";
+import { getCurrentSymbol, getCustomDeckObj } from "./card.decks";
+import {
+  saveKey,
+  updateCardScore,
+  getSettings,
+  getAllScores
+} from "./card.localstorage";
+import { chooseNextSyNr } from "../functions/card.actions";
 
 export const FLIPcard = (current, state) => {
   switch (current) {
@@ -75,4 +81,40 @@ export const checkAnswer = (state, action) => {
     cardScore: calScore(state.cardScore, corrAnswerd),
     pastScore: calScore(state.pastScore, corrAnswerd)
   };
+};
+
+// To initialize the app we get past scores and settings
+export const getScoresSettings = state => {
+  return new Promise((resolve, reject) => {
+    getSettings(state.settings).then(settings => {
+      const NewState = {
+        ...state,
+        settings
+      };
+      const symbolNr = chooseNextSyNr(NewState);
+      console.log("getScoresSettings symbolNr", symbolNr);
+      const customDeck = getCustomDeckObj(NewState);
+      console.log("getScoresSettings customDeckObj", customDeck);
+
+      const symbolObj = getCurrentSymbol({ ...NewState, customDeck }, symbolNr);
+      console.log("getScoresSettings symbolObj", symbolObj);
+      getAllScores({
+        ...NewState,
+        symbolNr,
+        symbolObj
+      }).then(allScores => {
+        console.log("RETURN getScoresSettings >>>> ", {
+          ...allScores,
+          settings
+        });
+        resolve({
+          ...allScores,
+          customDeck,
+          settings,
+          symbolNr,
+          symbolObj
+        });
+      });
+    });
+  });
 };

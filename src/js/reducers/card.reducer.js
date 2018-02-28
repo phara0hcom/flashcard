@@ -1,9 +1,9 @@
 import {
   FLIP,
   ANSWER_QUESTION,
-  INITIATE_SCORES_PENDING,
-  INITIATE_SCORES_FULFILLED,
-  INITIATE_SCORES_REJECTED,
+  INITIATE_APP_PENDING,
+  INITIATE_APP_FULFILLED,
+  INITIATE_APP_REJECTED,
   UPDATE_SCORES,
   RESET_LAST_ANSWER,
   NEXT_QUESTION_PENDING,
@@ -11,7 +11,6 @@ import {
   NEXT_QUESTION_REJECTED
 } from "../constants/card.constant";
 
-import { chooseNextSyNr } from "../functions/card.actions";
 import { FLIPcard, checkAnswer, createAnswer } from "../functions/card.reducer";
 import { getPastScore, getCardScore } from "../functions/card.localstorage";
 import { getCurrentSymbol } from "../functions/card.decks";
@@ -19,14 +18,14 @@ import { basicHiragana } from "../decks/hiragana";
 
 const initialState = {
   face: "UP",
-  deck: "basicHiragana",
-  deckFunc: "RANDOM",
-  fetchingScore: false,
-  fetchScoreError: false,
-  symbolNr: 0,
+  cardState: "LOADING",
+  fetchingSavedata: false,
+  fetchSavedataError: false,
+  symbolNr: null,
   last_answer: null,
   answers: [],
   answered: [],
+  customDeck: [],
   score: {
     questions_failed: 0,
     questions_correct: 0
@@ -38,6 +37,10 @@ const initialState = {
   cardScore: {
     questions_failed: 0,
     questions_correct: 0
+  },
+  settings: {
+    decks: ["basicHiragana"],
+    deckFunc: "RANDOM_IN_DECK"
   }
 };
 
@@ -58,28 +61,37 @@ const card = (state = initialState, action) => {
         cardScore: action.cardScore
       };
 
-    case INITIATE_SCORES_PENDING:
-      console.log("INITIATE_SCORES_PENDING");
+    case INITIATE_APP_PENDING:
+      console.log("INITIATE_APP_PENDING");
       return {
         ...state,
-        fetchingScore: true
+        cardState: "LOADING",
+        fetchingSavedata: true
       };
 
-    case INITIATE_SCORES_FULFILLED:
-      console.log("INITIATE_SCORES_FULFILLED");
+    case INITIATE_APP_FULFILLED:
+      console.log("INITIATE_APP_FULFILLED");
+      console.log("INITIATE_APP_FULFILLED >> action.payload", action.payload);
       return {
         ...state,
-        fetchingScore: false,
+        cardState: "DONE",
+        fetchingSavedata: false,
+        symbolNr: action.payload.symbolNr,
+        symbolObj: action.payload.symbolObj,
+        customDeck: action.payload.customDeck,
+        answers: createAnswer(action.payload.symbolObj),
         pastScore: action.payload.pastScore,
-        cardScore: action.payload.cardScore
+        cardScore: action.payload.cardScore,
+        settings: action.payload.settings
       };
 
-    case INITIATE_SCORES_REJECTED:
-      console.log("INITIATE_SCORES_REJECTED");
+    case INITIATE_APP_REJECTED:
+      console.log("INITIATE_APP_REJECTED");
       return {
         ...state,
-        fetchingScore: false,
-        fetchScoreError: true
+        cardState: "ERROR",
+        fetchingSavedata: false,
+        fetchSavedataError: true
       };
 
     case RESET_LAST_ANSWER:
@@ -101,7 +113,7 @@ const card = (state = initialState, action) => {
       return {
         ...state,
         fetchingScore: false,
-        fetchScoreError: true
+        fetchSavedataError: true
       };
 
     case NEXT_QUESTION_FULFILLED:
@@ -118,13 +130,8 @@ const card = (state = initialState, action) => {
       };
 
     default:
-      const symbolNr = chooseNextSyNr(state);
-      const symbolObj = getCurrentSymbol(state.deck, symbolNr);
       return {
-        ...state,
-        symbolNr,
-        symbolObj,
-        answers: createAnswer(symbolObj)
+        ...state
       };
   }
 };
