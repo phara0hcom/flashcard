@@ -4,3 +4,4 @@ import App from "./js/App";
 import registerServiceWorker from "./registerServiceWorker";
 
 render(<App />, document.getElementById("root"));
+registerServiceWorker();
