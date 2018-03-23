@@ -1,0 +1,7 @@
+{
+    "name": "FlashCard Japanese",
+    "short_name": "FlashCard",
+    "start_url": ".",
+    "display": "fullscreen",
+    "background_color": "white"
+}
