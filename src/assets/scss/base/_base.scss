@@ -26,10 +26,10 @@ html {
 body {
   box-sizing: border-box;
   padding: 0;
+}
 
-  @include respond( tab-port ) {
-    padding: 1rem;
-  }
+.main {
+  padding: 1rem;
 }
 
 ::selection {
