@@ -78,6 +78,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/index.html`,
       filename: "index.html",
+      favicon: "./src/assets/images/favicon.png",
       inject: "body",
       minify: {
         collapseWhitespace: true,
@@ -86,6 +87,7 @@ module.exports = {
         removeRedundantAttributes: true
       }
     }),
+
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production")

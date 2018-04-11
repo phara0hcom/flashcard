@@ -1,0 +1,41 @@
+stages:
+  - Merge
+  - Live
+Merge:
+  stage: Merge
+  script:
+    # - export
+    # - whoami
+
+    # # View changes and remove .git
+    - sudo chmod -R 777 /home/gitlab-runner/builds
+    - sudo rm -rf .git
+    - sudo rm -rf src
+    - sudo rm -rf .babelrc
+    - sudo rm -rf .eslintrc.js
+    - sudo rm -rf webpack.config.js
+    - sudo rm -rf webpack.dev.config.js
+    - sudo rm -rf webpack.production.config.js
+    - sudo rm -rf package-lock.json
+    - sudo rm -rf package.json
+    - cd public
+    - sudo cp -a * ../
+    - cd ..
+    - sudo rm -rf public
+    - sudo ls -l
+    - sudo chmod -R 777 /home/gitlab-runner/builds
+    # - sudo rm -rf .sass-cache
+  artifacts:
+    untracked: true
+    name: "$CI_PROJECT_NAME"
+    paths:
+      - ./
+Deploy:
+  stage: Live
+  when: on_success
+  script:
+    # Replace with latest build
+    - sudo chmod -R 777 /home/gitlab-runner/builds
+    - sudo rm -rf /var/www/tamerelsayed.com/root/flash
+    - sudo cp -a * /var/www/tamerelsayed.com/root/flash
+    - sudo chmod -R 777 /home/gitlab-runner/builds
