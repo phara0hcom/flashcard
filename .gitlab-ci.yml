@@ -37,5 +37,6 @@ Deploy:
     # Replace with latest build
     - sudo chmod -R 777 /home/gitlab-runner/builds
     - sudo rm -rf /var/www/tamerelsayed.com/root/flash
+    - sudo mkdir /var/www/tamerelsayed.com/root/flash
     - sudo cp -a * /var/www/tamerelsayed.com/root/flash
     - sudo chmod -R 777 /home/gitlab-runner/builds
