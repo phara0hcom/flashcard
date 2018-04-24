@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React from 'react';
 
-import Styles from "../../../assets/scss/pages/_settings";
+// import Styles from "../../../assets/scss/pages/_settings";
 
-import Settings from "../../components/Settings";
+import Settings from '../../components/Settings';
 
-export default class extends Component {
-  render() {
+const settingsPage = () => {
     return (
-      <div>
-        <Settings />
-      </div>
+        <div>
+            <Settings />
+        </div>
     );
-  }
-}
+};
+
+export default settingsPage;

@@ -102,7 +102,7 @@ export const basicKatakana = [
     {
         index: 'Kata_T_i',
         symbol: 'チ',
-        roman: 'ti',
+        roman: 'chi',
         wrong_answers: ['te', 'de', 'ke', 'mo']
     },
     {
@@ -273,18 +273,18 @@ export const basicKatakana = [
         roman: 'wa',
         wrong_answers: ['te', 'wo', 'ti', 'hu']
     },
-    {
-        index: 'Kata_W_i',
-        symbol: 'ヰ',
-        roman: 'wi',
-        wrong_answers: ['ni', 'ha', 'ru', 're']
-    },
-    {
-        index: 'Kata_W_e',
-        symbol: 'ヱ',
-        roman: 'we',
-        wrong_answers: ['ru', 'u', 'no', 'hu']
-    },
+    // {
+    //     index: 'Kata_W_i',
+    //     symbol: 'ヰ',
+    //     roman: 'wi',
+    //     wrong_answers: ['ni', 'ha', 'ru', 're']
+    // },
+    // {
+    //     index: 'Kata_W_e',
+    //     symbol: 'ヱ',
+    //     roman: 'we',
+    //     wrong_answers: ['ru', 'u', 'no', 'hu']
+    // },
     {
         index: 'Kata_W_o',
         symbol: 'ヲ',

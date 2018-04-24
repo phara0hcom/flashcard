@@ -1,12 +1,12 @@
-import decks from "../decks";
+import decks from '../decks';
 
 export const returnDeck = state => {
-  let customDeck = [];
-  const decksNames = state.settings.decks;
-  decksNames.map((decksName, i) => {
-    customDeck = customDeck.concat(decks[decksName]);
-  });
-  return customDeck;
+    let customDeck = [];
+    const decksNames = state.settings.decks;
+    decksNames.map((decksName) => {
+        customDeck = customDeck.concat(decks[decksName]);
+    });
+    return customDeck;
 };
 
 /**
@@ -15,53 +15,53 @@ export const returnDeck = state => {
  */
 
 const shuffleArray = a => {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 };
 
 const shuffleArrayInit = DeckLength => {
-  let deckNrs = [];
-  for (let i = DeckLength - 1; i >= 0; i--) {
-    deckNrs = deckNrs.concat([i]);
-  }
-  console.log("shuffleArray >> deckNrs", deckNrs);
+    let deckNrs = [];
+    for (let i = DeckLength - 1; i >= 0; i--) {
+        deckNrs = deckNrs.concat([i]);
+    }
+    console.log('shuffleArray >> deckNrs', deckNrs);
 
-  return shuffleArray(deckNrs);
+    return shuffleArray(deckNrs);
 };
 
 export const getCustomDeckObj = state => {
-  switch (state.settings.deckFunc) {
-    case "RANDOM":
-      return [];
+    switch (state.settings.deckFunc) {
+    case 'RANDOM':
+        return [];
 
-    case "RANDOM_IN_DECK":
-      const concatDeck = returnDeck(state);
-      return shuffleArrayInit(concatDeck.length);
-
+    case 'RANDOM_IN_DECK': {
+        const concatDeck = returnDeck(state);
+        return shuffleArrayInit(concatDeck.length);
+    }
     default:
-      return [];
-  }
+        return [];
+    }
 };
 
 export const getCurrentSymbol = (state, symbolNr) => {
-  const concatDecks = returnDeck(state);
+    const concatDecks = returnDeck(state);
 
-  switch (state.settings.deckFunc) {
-    case "RANDOM":
-      return concatDecks[symbolNr];
+    switch (state.settings.deckFunc) {
+        case 'RANDOM':
+            return concatDecks[symbolNr];
 
-    case "RANDOM_IN_DECK":
-      // console.log("getCurrentSymbol symbolNr", symbolNr);
-      // console.log(
-      //   "getCurrentSymbol state.customDeck[symbolNr]",
-      //   state.customDeck[symbolNr]
-      // );
-      return concatDecks[state.customDeck[symbolNr]];
+        case 'RANDOM_IN_DECK':
+            // console.log("getCurrentSymbol symbolNr", symbolNr);
+            // console.log(
+            //   "getCurrentSymbol state.customDeck[symbolNr]",
+            //   state.customDeck[symbolNr]
+            // );
+            return concatDecks[state.customDeck[symbolNr]];
 
-    default:
-      return [];
-  }
+        default:
+            return [];
+    }
 };
